@@ -144,12 +144,12 @@ export function Navigation() {
           pointerEvents: 'none'
         }}
       >
-        {/* Glass navbar wrapper - fades out when menu opens */}
+        {/* Glass navbar wrapper - always visible, no fade */}
         <motion.div 
           initial={{ y: -100, opacity: 0 }}
           animate={{ 
             y: 0, 
-            opacity: isOpen ? 0 : 1,
+            opacity: 1,
             width: scrolled ? '100%' : 'auto'
           }}
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
@@ -169,7 +169,8 @@ export function Navigation() {
             WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
             boxShadow: scrolled ? '0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)' : 'none',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            visibility: isOpen ? 'hidden' : 'visible'
           }}
         >
           {/* Hamburger inside wrapper - only visible when wrapper is visible */}
