@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 // Meta tags for SEO - sets document metadata
 export function MetaTags() {
   useEffect(() => {
-    // OG Image URL - dynamically constructed from current origin
-    // Works on localhost, staging, and production
-    const ogImageUrl = `${window.location.origin}/og-image.png`;
 
     // Set document title
     document.title = "Pink Lady Yacht Support Services • Premium Yacht Management in Thailand";
@@ -42,48 +39,6 @@ export function MetaTags() {
       meta.content = 'Pink Lady Yacht Support Services';
       document.head.appendChild(meta);
     }
-
-    // Set Open Graph tags
-    const ogTags = [
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: window.location.href },
-      { property: 'og:title', content: 'Pink Lady Yacht Support Services - Premium Yacht Management in Thailand' },
-      { property: 'og:description', content: 'Professional yacht support services in Thailand. Provisioning, logistics, maintenance, bunkering, and yacht management in Phuket, Krabi, and Koh Samui.' },
-      { property: 'og:image', content: ogImageUrl },
-    ];
-
-    ogTags.forEach(({ property, content }) => {
-      const existing = document.querySelector(`meta[property="${property}"]`);
-      if (existing) {
-        existing.setAttribute('content', content);
-      } else {
-        const meta = document.createElement('meta');
-        meta.setAttribute('property', property);
-        meta.content = content;
-        document.head.appendChild(meta);
-      }
-    });
-
-    // Set Twitter tags
-    const twitterTags = [
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:url', content: window.location.href },
-      { property: 'twitter:title', content: 'Pink Lady Yacht Support Services - Premium Yacht Management in Thailand' },
-      { property: 'twitter:description', content: 'Professional yacht support services in Thailand. Provisioning, logistics, maintenance, bunkering, and yacht management in Phuket, Krabi, and Koh Samui.' },
-      { property: 'twitter:image', content: ogImageUrl },
-    ];
-
-    twitterTags.forEach(({ property, content }) => {
-      const existing = document.querySelector(`meta[property="${property}"]`);
-      if (existing) {
-        existing.setAttribute('content', content);
-      } else {
-        const meta = document.createElement('meta');
-        meta.setAttribute('property', property);
-        meta.content = content;
-        document.head.appendChild(meta);
-      }
-    });
 
     // Set canonical URL - tells Google this is the main version
     const canonicalUrl = window.location.origin + window.location.pathname;

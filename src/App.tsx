@@ -10,13 +10,11 @@ import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Toaster } from "./components/ui/sonner";
 import { ActiveSectionProvider } from "./components/ActiveSectionContext";
-import { MetaTags } from './components/MetaTags';
 import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 export default function App() {
   return (
     <>
-      <MetaTags />
       <GoogleAnalytics />
       
       <ActiveSectionProvider>
