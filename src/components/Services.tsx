@@ -161,16 +161,17 @@ export function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="md:hidden fixed inset-0 z-[90] flex items-center justify-center p-6"
             onClick={() => setSelectedIndex(null)}
           >
             <div className="absolute inset-0 backdrop-blur-sm bg-black/20" />
 
             <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              transition={{ type: "spring", duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
               className="relative backdrop-blur-xl border-2 border-white/40 rounded-3xl p-8 max-w-md w-full shadow-2xl"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 103, 177, 0.15) 0%, rgba(21, 60, 96, 0.2) 100%)',

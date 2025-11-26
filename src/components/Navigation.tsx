@@ -152,7 +152,7 @@ export function Navigation() {
             opacity: isOpen ? 0 : 1,
             width: scrolled ? '100%' : 'auto'
           }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className="flex items-center rounded-3xl overflow-hidden"
           style={{
             padding: scrolled ? '0.875rem 1.25rem 0.875rem 6.5rem' : '0.875rem',
@@ -168,7 +168,7 @@ export function Navigation() {
             backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
             WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
             boxShadow: scrolled ? '0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)' : 'none',
-            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             pointerEvents: 'none'
           }}
         >
