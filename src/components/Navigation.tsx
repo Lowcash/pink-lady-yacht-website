@@ -113,7 +113,7 @@ export function Navigation() {
         style={{
           zIndex: 260,
           top: (scrolled && !isOpen) ? '1.75rem' : '2.5rem',
-          left: '0.75rem',
+          left: '0.5rem',
           height: '3rem',
           transition: 'top 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
           pointerEvents: 'none'
@@ -344,21 +344,12 @@ export function Navigation() {
                     {navItems.map((item, index) => {
                       const Icon = item.icon;
                       return (
-                        <motion.button
+                        <button
                           key={item.id}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ 
-                            duration: 0.2, 
-                            delay: 0.05 + (index * 0.04),
-                          }}
                           onClick={(e) => {
                             e.stopPropagation();
                             scrollToSection(item.id);
                           }}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
                           className="w-full flex items-center gap-4 px-6 py-4 md:py-5 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-[#ff67b1]/60 transition-all duration-300 cursor-pointer group"
                           style={{
                             backdropFilter: 'blur(20px)',
@@ -375,7 +366,7 @@ export function Navigation() {
                           >
                             {item.label}
                           </span>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
