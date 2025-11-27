@@ -9,7 +9,7 @@ export function Services() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
-    <section id="services" className="min-h-screen bg-[#153c60] text-white py-34 px-3 md:px-6 relative overflow-hidden flex items-center justify-center">
+    <section id="services" className="min-h-screen bg-[#153c60] text-white py-32 md:py-40 px-3 md:px-6 relative overflow-hidden flex flex-col justify-center">
       {/* Clean Minimalist Background */}
       <div className="absolute inset-0 bg-[#153c60]" />
 
@@ -25,13 +25,13 @@ export function Services() {
           >
             <span className="text-white">COMPREHENSIVE</span>
             <br />
-            <span className="text-[#ff67b1]">YACHT SERVICES</span>
+            <span className="text-[#ff67b1]">YACHTING SUPPORT SERVICES</span>
           </h2>
           <p 
             className="text-white/90 text-base md:text-lg max-w-2xl mx-auto"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
-            Your one-stop solution for professional yacht operations in Thailand
+            Your one-stop solution for professional yachting operations in Thailand
           </p>
         </div>
 
@@ -111,30 +111,21 @@ export function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden fixed inset-0 z-[500] flex items-center justify-center p-6"
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-0 z-[500] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md"
             onClick={() => setSelectedIndex(null)}
           >
-            <div 
-              className="absolute inset-0 backdrop-blur-md bg-black/30" 
-              style={{
-                willChange: 'backdrop-filter, opacity',
-                transition: 'backdrop-filter 0.3s ease-out, opacity 0.3s ease-out'
-              }}
-            />
-
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="relative backdrop-blur-xl border-2 border-white/40 rounded-3xl p-8 max-w-md w-full shadow-2xl"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 103, 177, 0.15) 0%, rgba(21, 60, 96, 0.2) 100%)',
+                background: 'linear-gradient(135deg, rgba(255, 103, 177, 0.15) 0%, rgba(21, 60, 96, 0.9) 100%)',
                 boxShadow: '0 20px 60px rgba(21, 60, 96, 0.3), 0 8px 24px rgba(255, 103, 177, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
-                willChange: 'transform, opacity'
               }}
-              onClick={() => setSelectedIndex(null)}
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedIndex(null)}

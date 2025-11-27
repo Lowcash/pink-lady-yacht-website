@@ -55,7 +55,7 @@ function Counter({ end, label, suffix = "", prefix = "" }: StatProps) {
 
 export function Stats() {
   return (
-    <section id="stats" className="relative min-h-screen flex items-center justify-center overflow-hidden py-34">
+    <section id="stats" className="relative min-h-screen flex flex-col justify-center overflow-hidden py-32 md:py-40">
       {/* Minimalist Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#153c60] to-[#1a4a75]" />
 
@@ -74,7 +74,7 @@ export function Stats() {
             className="text-white/80 text-lg elegant-text max-w-2xl mx-auto"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
-            Years of excellence in yacht support services across Thailand
+            Years of excellence in yachting services across Thailand
           </p>
         </div>
 

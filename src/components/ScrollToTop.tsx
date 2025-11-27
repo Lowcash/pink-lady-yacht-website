@@ -5,25 +5,29 @@ import { ArrowUp } from "lucide-react";
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [isLightSection, setIsLightSection] = useState(false);
-  const [isScrollingToHero, setIsScrollingToHero] = useState(false);
 
   useEffect(() => {
     const main = document.querySelector("main");
     if (!main) return;
 
     let hideTimeout: NodeJS.Timeout | null = null;
-    let lastScrollTop = 0;
+    let isResetting = false;
+
+    const handleReset = () => {
+      setIsVisible(false);
+      isResetting = true;
+      // Unlock after scroll animation (approx 1s)
+      setTimeout(() => {
+        isResetting = false;
+      }, 1000);
+    };
+    window.addEventListener('reset-navigation', handleReset);
 
     const handleScroll = () => {
+      if (isResetting) return;
+
       const currentScrollTop = main.scrollTop;
       const shouldShow = currentScrollTop > window.innerHeight * 0.3;
-      
-      // Detect if scrolling up towards hero
-      const scrollingUp = currentScrollTop < lastScrollTop;
-      const nearingHero = currentScrollTop < window.innerHeight * 0.6; // Within 60vh of top
-      setIsScrollingToHero(scrollingUp && nearingHero);
-      
-      lastScrollTop = currentScrollTop;
       
       // Clear any pending hide timeout
       if (hideTimeout) {
@@ -34,10 +38,7 @@ export function ScrollToTop() {
       if (shouldShow) {
         setIsVisible(true);
       } else {
-        // Delay hiding to allow exit animation to complete
-        hideTimeout = setTimeout(() => {
-          setIsVisible(false);
-        }, 200);
+        setIsVisible(false);
       }
       
       // Detect section at bottom-right corner (where the button is)
@@ -61,20 +62,16 @@ export function ScrollToTop() {
     main.addEventListener("scroll", handleScroll);
     return () => {
       main.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('reset-navigation', handleReset);
       if (hideTimeout) clearTimeout(hideTimeout);
     };
   }, []);
 
   const scrollToTop = () => {
-    setIsScrollingToHero(true);
     const element = document.getElementById("hero");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    // Reset after scroll completes
-    setTimeout(() => {
-      setIsScrollingToHero(false);
-    }, 1000);
   };
 
   return (
@@ -82,10 +79,10 @@ export function ScrollToTop() {
       {isVisible && (
         <motion.button
           initial={{ scale: 0 }}
-          animate={{ scale: isScrollingToHero ? 0.8 : 1 }}
+          animate={{ scale: 1 }}
           exit={{ scale: 0 }}
           transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-          whileHover={{ scale: isScrollingToHero ? 0.88 : 1.1 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
           className="fixed bottom-6 right-4 sm:right-6 z-40 p-3 sm:p-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center group"

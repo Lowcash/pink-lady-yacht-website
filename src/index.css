@@ -404,7 +404,7 @@
   }
 
   body {
-    background-color: var(--background);
+    background-color: #0a2540;
     color: var(--foreground);
     font-family: var(--font-poppins);
   }
@@ -1448,6 +1448,16 @@
     padding-top: calc(var(--spacing) * 40);
   }
 
+  .py-32 {
+    padding-top: calc(var(--spacing) * 32);
+    padding-bottom: calc(var(--spacing) * 32);
+  }
+
+  .py-40 {
+    padding-top: calc(var(--spacing) * 40);
+    padding-bottom: calc(var(--spacing) * 40);
+  }
+
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
   }
@@ -2241,6 +2251,13 @@
   @media (width >= 48rem) {
     .md\:gap-12 {
       gap: calc(var(--spacing) * 12);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:py-40 {
+      padding-top: calc(var(--spacing) * 40);
+      padding-bottom: calc(var(--spacing) * 40);
     }
   }
 
@@ -3051,4 +3068,9 @@ body {
   50% {
     opacity: .5;
   }
+}
+
+/* Custom Contact Hover */
+.contact-link:hover .contact-text {
+  color: #ffdbed !important;
 }

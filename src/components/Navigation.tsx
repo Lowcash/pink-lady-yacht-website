@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, Briefcase, Info, MessageCircle, TrendingUp, Star } from "lucide-react";
 import logoImage from "../assets/pink-lady-logo.png";
 import { motion, AnimatePresence } from "motion/react";
@@ -7,25 +7,27 @@ import { useActiveSection } from "./ActiveSectionContext";
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isLogoNavigating, setIsLogoNavigating] = useState(false);
   const { activeSection, setActiveSection } = useActiveSection();
+  const isScrollingToTop = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const mainElement = document.querySelector('main');
       const scrollPosition = mainElement ? mainElement.scrollTop : window.scrollY;
       
-      // Debug log
-      console.log('🔍 Scroll Debug:', {
-        scrollPosition,
-        scrolled: scrollPosition > 100,
-        currentScrolledState: scrolled
-      });
-      
+      // If we are forcing scroll to top, ignore the > 100 check and keep it false
+      if (isScrollingToTop.current) {
+        if (scrollPosition < 50) {
+          isScrollingToTop.current = false;
+        }
+        if (scrolled) setScrolled(false);
+        return;
+      }
+
       // Simple logic: scrolled = true when scroll > 100px
       const newScrolled = scrollPosition > 100;
+      
       if (newScrolled !== scrolled) {
-        console.log('✅ Scrolled state changed:', scrolled, '→', newScrolled);
         setScrolled(newScrolled);
       }
       
@@ -76,17 +78,15 @@ export function Navigation() {
   };
 
   const handleLogoClick = () => {
-    // If menu is open and we're scrolled (not at hero), prevent logo shrink during navigation
-    if (isOpen && scrolled) {
-      setIsLogoNavigating(true);
-      scrollToSection("hero");
-      // Reset after navigation completes (300ms menu close + 1000ms smooth scroll)
-      setTimeout(() => {
-        setIsLogoNavigating(false);
-      }, 1300);
-    } else {
-      scrollToSection("hero");
-    }
+    // Immediate reset
+    if (isOpen) setIsOpen(false);
+    window.dispatchEvent(new CustomEvent('reset-navigation'));
+    
+    // Force scrolled to false immediately and lock it
+    isScrollingToTop.current = true;
+    setScrolled(false);
+
+    scrollToSection("hero");
   };
 
   // Determine if current section is light (about/contact/testimonials) or dark (hero/services/stats/footer)
@@ -126,12 +126,12 @@ export function Navigation() {
           }}
           initial={{ scale: 0.9 }}
           animate={{ 
-            scale: (isOpen || !scrolled || isLogoNavigating) ? 0.85 : 0.45,
+            scale: (isOpen || !scrolled) ? 0.85 : 0.45,
           }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
           onClick={handleLogoClick}
-          whileHover={{ scale: (isOpen || !scrolled || isLogoNavigating) ? 0.88 : 0.48 }}
-          whileTap={{ scale: (isOpen || !scrolled || isLogoNavigating) ? 0.82 : 0.42 }}
+          whileHover={{ scale: (isOpen || !scrolled) ? 0.88 : 0.48 }}
+          whileTap={{ scale: (isOpen || !scrolled) ? 0.82 : 0.42 }}
         >
           <img 
             src={logoImage} 
@@ -139,7 +139,8 @@ export function Navigation() {
             className="h-32 w-auto"
             style={{ 
               filter: 'drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6)) drop-shadow(0 2px 8px rgba(255, 103, 177, 0.4)) brightness(1.1)',
-              transformOrigin: 'center left'
+              transformOrigin: 'center left',
+              marginTop: 10
             }}
           />
         </motion.div>
@@ -232,8 +233,8 @@ export function Navigation() {
 
       {/* DESKTOP: Floating Logo - No Wrapper */}
       <div
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
-          scrolled ? 'py-3' : 'py-8'
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-600 ease-in-out ${
+          scrolled ? 'py-8' : 'py-8'
         }`}
         style={{ pointerEvents: 'none' }}
       >
@@ -242,9 +243,6 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             {/* Logo Section - Direct, No Wrapper */}
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => scrollToSection("hero")}
@@ -257,13 +255,14 @@ export function Navigation() {
                   <img 
                     src={logoImage} 
                     alt="Pink Lady" 
-                    className={`w-auto transition-all duration-700 ease-out ${
+                    className={`w-auto transition-all duration-[1000ms] ease-in-out ${
                       scrolled ? 'h-32 xl:h-36' : 'h-44 xl:h-48'
                     }`}
                     style={{ 
                       filter: scrolled 
                         ? 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2))'
-                        : 'drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))'
+                        : 'drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))',
+                      transitionDuration: '1000ms',
                     }}
                   />
                 </div>
@@ -271,7 +270,7 @@ export function Navigation() {
                 {/* Text - Barva podle sekce */}
                 <div>
                   <h1 
-                    className="text-3xl xl:text-4xl uppercase leading-none tracking-wide transition-all duration-500 text-white"
+                    className="text-3xl xl:text-4xl uppercase leading-none tracking-wide transition-all duration-600 ease-in-out text-white"
                     style={{ 
                       fontFamily: 'Anton, sans-serif',
                       textShadow: scrolled 
@@ -282,7 +281,7 @@ export function Navigation() {
                     <span className="text-[#ff67b1]">PINK LADY</span>
                   </h1>
                   <p 
-                    className={`text-xs uppercase tracking-widest mt-1 transition-all duration-500 ${
+                    className={`text-xs uppercase tracking-widest mt-1 transition-all duration-600 ease-in-out ${
                       isLightSection ? 'text-[#153c60]' : 'text-white/90'
                     }`}
                     style={{ 
@@ -292,7 +291,7 @@ export function Navigation() {
                         : '0 2px 8px rgba(0, 0, 0, 0.6)'
                     }}
                   >
-                    Yacht Support Services
+                    Yachting Support Services
                   </p>
                 </div>
               </div>
@@ -333,10 +332,10 @@ export function Navigation() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="text-white/60 text-xs md:text-sm uppercase tracking-widest mb-8 md:mb-10"
+                  className="text-white text-xs md:text-sm uppercase tracking-widest mb-8 md:mb-10"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
-                  Yacht Support Services
+                  Yachting Support Services
                 </motion.p>
 
                 {/* Menu Items - Stack na mobilu, Grid na tabletu */}

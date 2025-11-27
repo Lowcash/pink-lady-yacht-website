@@ -122,9 +122,9 @@ export function Hero() {
               textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(255, 103, 177, 0.3)'
             }}
           >
-            <span className="text-[#ff67b1]">PINK LADY YACHT</span>
+            <span className="text-[#ff67b1]">PINK LADY</span>
             <br />
-            <span className="text-white">SUPPORT SERVICES</span>
+            <span className="text-white">YACHTING SERVICES</span>
           </h1>
           
           <p 

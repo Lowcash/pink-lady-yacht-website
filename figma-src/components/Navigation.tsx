@@ -233,7 +233,7 @@ export function Navigation() {
       {/* DESKTOP: Floating Logo - No Wrapper */}
       <div
         className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
-          scrolled ? 'py-3' : 'py-8'
+          scrolled ? 'py-3' : 'py-3'
         }`}
         style={{ pointerEvents: 'none' }}
       >

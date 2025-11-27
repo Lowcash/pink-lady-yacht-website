@@ -38,7 +38,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen flex items-center justify-center overflow-hidden py-40 md:py-40">
+    <section id="contact" className="relative min-h-screen flex flex-col justify-center overflow-hidden py-32 md:py-40">
       {/* Minimalist Gradient Background */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-white via-[#fef8fb] to-white" />
 
@@ -57,7 +57,7 @@ export function Contact() {
             className="text-[#153c60]/80 text-base md:text-lg max-w-2xl mx-auto elegant-text"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
-            Contact us today for personalized yacht assistance anywhere in Thailand.
+            Contact us today for personalized yachting assistance anywhere in Thailand.
           </p>
         </div>
 
@@ -74,33 +74,39 @@ export function Contact() {
               
               {/* Social Media */}
               <div className="flex gap-2">
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={COMPANY_INFO.social.facebook}
-                  className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={16} />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={COMPANY_INFO.social.instagram}
-                  className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={16} />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={COMPANY_INFO.social.linkedin}
-                  className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={16} />
-                </motion.a>
+                {COMPANY_INFO.social?.facebook && (
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={COMPANY_INFO.social.facebook}
+                    className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
+                    aria-label="Facebook"
+                  >
+                    <Facebook size={16} />
+                  </motion.a>
+                )}
+                {COMPANY_INFO.social?.instagram && (
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={COMPANY_INFO.social.instagram}
+                    className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
+                    aria-label="Instagram"
+                  >
+                    <Instagram size={16} />
+                  </motion.a>
+                )}
+                {COMPANY_INFO.social?.linkedin && (
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={COMPANY_INFO.social.linkedin}
+                    className="w-9 h-9 rounded-lg bg-[#ff67b1] flex items-center justify-center hover:bg-[#ff4d9f] transition-colors cursor-pointer"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin size={16} />
+                  </motion.a>
+                )}
               </div>
             </div>
             
@@ -109,40 +115,44 @@ export function Contact() {
                 href={COMPANY_INFO.mapLink}
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 group cursor-pointer"
+                className="contact-link inline-flex items-center gap-4 group cursor-pointer transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] group-hover:bg-[#ff67b1]/70 flex items-center justify-center flex-shrink-0 transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] flex items-center justify-center flex-shrink-0 transition-all duration-300">
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
-                <div className="transition-all duration-300 group-hover:text-[#ff67b1]/70" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                  <p className="opacity-80 text-sm">{COMPANY_INFO.locationName}</p>
-                  <p className="text-sm">{COMPANY_INFO.address}</p>
+                <div className="transition-all duration-300" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <p className="contact-text text-sm text-white/80 transition-colors duration-300">{COMPANY_INFO.locationName}</p>
+                  <p className="contact-text text-sm text-white transition-colors duration-300">{COMPANY_INFO.address}</p>
                 </div>
               </a>
+
+              <br />
 
               <a 
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="flex items-start gap-3 group cursor-pointer"
+                className="contact-link inline-flex items-center gap-4 group cursor-pointer transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] group-hover:bg-[#ff67b1]/70 flex items-center justify-center flex-shrink-0 transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] flex items-center justify-center flex-shrink-0 transition-all duration-300">
                   <Phone className="w-5 h-5 text-white" />
                 </div>
-                <div className="transition-all duration-300 group-hover:text-[#ff67b1]/70" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                  <p className="opacity-80 text-sm">Phone</p>
-                  <p className="text-sm">{COMPANY_INFO.phoneDisplay}</p>
+                <div className="transition-all duration-300" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <p className="contact-text text-sm text-white/80 transition-colors duration-300">Phone</p>
+                  <p className="contact-text text-sm text-white transition-colors duration-300">{COMPANY_INFO.phoneDisplay}</p>
                 </div>
               </a>
 
+              <br />
+
               <a 
                 href={`mailto:${COMPANY_INFO.email}`}
-                className="flex items-start gap-3 group cursor-pointer"
+                className="contact-link inline-flex items-center gap-4 group cursor-pointer transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] group-hover:bg-[#ff67b1]/70 flex items-center justify-center flex-shrink-0 transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-[#ff67b1] flex items-center justify-center flex-shrink-0 transition-all duration-300">
                   <Mail className="w-5 h-5 text-white" />
                 </div>
-                <div className="transition-all duration-300 group-hover:text-[#ff67b1]/70" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                  <p className="opacity-80 text-sm">Email</p>
-                  <p className="text-sm whitespace-nowrap break-all">{COMPANY_INFO.email}</p>
+                <div className="transition-all duration-300" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <p className="contact-text text-sm text-white/80 transition-colors duration-300">Email</p>
+                  <p className="contact-text text-sm whitespace-nowrap break-all text-white transition-colors duration-300">{COMPANY_INFO.email}</p>
                 </div>
               </a>
             </div>
@@ -157,8 +167,7 @@ export function Contact() {
                   CONNECT ON LINE
                 </p>
                 <div className="flex justify-center">
-                  <motion.div 
-                    whileHover={{ scale: 1.03 }}
+                  <div 
                     className="bg-white p-4 rounded-2xl shadow-xl"
                   >
                     <img 
@@ -166,7 +175,7 @@ export function Contact() {
                       alt="Line QR Code" 
                       className="w-40 h-40 md:w-48 md:h-48 object-contain"
                     />
-                  </motion.div>
+                  </div>
                 </div>
                 <p 
                   className="text-sm opacity-90"
@@ -274,39 +283,45 @@ export function Contact() {
                 className="text-[#153c60]/70 text-xs md:text-sm"
                 style={{ fontFamily: 'Poppins, sans-serif' }}
               >
-                Premium Yacht Support Services
+                Premium Yachting Services
               </p>
             </div>
             
             {/* Social Links */}
             <div className="flex gap-3">
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href={COMPANY_INFO.social.facebook}
-                className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
-                aria-label="Facebook"
-              >
-                <Facebook size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href={COMPANY_INFO.social.instagram}
-                className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
-                aria-label="Instagram"
-              >
-                <Instagram size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href={COMPANY_INFO.social.linkedin}
-                className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
-              </motion.a>
+              {COMPANY_INFO.social?.facebook && (
+                <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={COMPANY_INFO.social.facebook}
+                  className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
+                </motion.a>
+              )}
+              {COMPANY_INFO.social?.instagram && (
+                <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={COMPANY_INFO.social.instagram}
+                  className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
+                </motion.a>
+              )}
+              {COMPANY_INFO.social?.linkedin && (
+                <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={COMPANY_INFO.social.linkedin}
+                  className="w-10 h-10 rounded-xl bg-[#153c60]/10 hover:bg-[#ff67b1]/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 border border-[#153c60]/10"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} className="text-[#153c60]/70 hover:text-[#ff67b1]" />
+                </motion.a>
+              )}
             </div>
 
             {/* Copyright & Tagline */}
