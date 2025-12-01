@@ -1,5 +1,7 @@
 import { Ship, Anchor, Map, Phone, Mail, Clock, Shield, Award, Users, Zap, FileCheck, Landmark, Settings, Sailboat, Package, Wrench, Fuel, FileText, Banknote, TrendingUp } from "lucide-react";
 
+export const SITE_URL = 'https://pinkladyyachtingservices.com';
+
 export const COMPANY_INFO = {
   name: "Pink Lady Yachting Support Services",
   tagline: "Premium Yachting Support Services in Thailand",
