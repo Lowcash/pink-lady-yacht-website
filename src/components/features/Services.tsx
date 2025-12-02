@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { SectionDivider } from "../shared/SectionDivider";
@@ -7,6 +7,18 @@ import { SERVICES } from "../../lib/constants";
 export function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedIndex]);
 
   return (
     <section id="services" className="min-h-screen bg-[#153c60] text-white py-32 md:py-40 px-3 md:px-6 relative overflow-hidden flex flex-col justify-center">
@@ -125,7 +137,7 @@ export function Services() {
                 background: 'linear-gradient(135deg, rgba(255, 103, 177, 0.15) 0%, rgba(21, 60, 96, 0.9) 100%)',
                 boxShadow: '0 20px 60px rgba(21, 60, 96, 0.3), 0 8px 24px rgba(255, 103, 177, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
               }}
-              onClick={(e) => e.stopPropagation()}
+              // Removed stopPropagation to allow clicking anywhere to close
             >
               <button
                 onClick={() => setSelectedIndex(null)}
