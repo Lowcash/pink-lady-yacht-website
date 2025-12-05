@@ -1,8 +1,4 @@
-import { useState } from "react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import lineQRCode from "../../assets/line-qr-code.png";
 import { motion } from "motion/react";
@@ -10,33 +6,6 @@ import { toast } from "sonner@2.0.3";
 import { COMPANY_INFO } from "../../lib/constants";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    
-    toast.success("Message Sent!", {
-      description: "Thank you for contacting us. We'll respond during business hours (Mon-Fri, 9AM-6PM ICT).",
-      duration: 5000,
-    });
-    
-    setFormData({ name: "", email: "", message: "" });
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <section id="contact" className="snap-start relative min-h-screen flex flex-col justify-center overflow-hidden py-32 md:py-40">
       {/* Minimalist Gradient Background */}
@@ -188,81 +157,6 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Contact Form - COMMENTED OUT FOR NOW */}
-        {/*
-        <div className="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-xl mt-8">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <Label 
-                htmlFor="name"
-                className="text-[#153c60]"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
-                Name
-              </Label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 border-[#153c60]/30 focus:border-[#ff67b1] focus:ring-[#ff67b1]"
-                placeholder="Your name"
-              />
-            </div>
-
-            <div>
-              <Label 
-                htmlFor="email"
-                className="text-[#153c60]"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 border-[#153c60]/30 focus:border-[#ff67b1] focus:ring-[#ff67b1]"
-                placeholder="your@email.com"
-              />
-            </div>
-
-            <div>
-              <Label 
-                htmlFor="message"
-                className="text-[#153c60]"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
-                Message
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="mt-1 min-h-[120px] border-[#153c60]/30 focus:border-[#ff67b1] focus:ring-[#ff67b1]"
-                placeholder="Tell us about your yacht support needs..."
-              />
-            </div>
-
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                type="submit"
-                className="w-full bg-[#ff67b1] hover:bg-[#ff4d9f] text-white py-6 text-lg rounded-full uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
-                style={{ fontFamily: 'Anton, sans-serif' }}
-              >
-                SEND MESSAGE
-              </Button>
-            </motion.div>
-          </form>
-        </div>
-        */}
 
         {/* Footer Section - Integrated */}
         <div className="relative mt-8 md:mt-12 pt-8 md:pt-12">
