@@ -12,9 +12,9 @@ export const COMPANY_INFO = {
   locationName: "Phuket Yacht Haven Marina",
   mapLink: "https://maps.app.goo.gl/hFHh1NGk5wp2XoRg9",
   social: {
-    // facebook: "#",
-    // instagram: "#",
-    // linkedin: "#",
+    facebook: undefined as string | undefined,
+    instagram: undefined as string | undefined,
+    linkedin: undefined as string | undefined,
   }
 };
 

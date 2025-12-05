@@ -21,32 +21,11 @@ export function Hero() {
   const [quote, setQuote] = useState("");
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   // Parallax effect
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  // Track scroll for logo animation
-  useEffect(() => {
-    const handleScroll = () => {
-      const mainElement = document.querySelector('main');
-      const scrollPosition = mainElement ? mainElement.scrollTop : window.scrollY;
-      setScrolled(scrollPosition > 100);
-    };
-    
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-      mainElement.addEventListener("scroll", handleScroll);
-      handleScroll();
-      return () => mainElement.removeEventListener("scroll", handleScroll);
-    } else {
-      window.addEventListener("scroll", handleScroll);
-      handleScroll();
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
 
   useEffect(() => {
     const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -103,9 +82,9 @@ export function Hero() {
             title="Background Video"
           />
           {/* Gradient Overlay - Top & Bottom only for cinematic look */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a2540]/60 via-transparent to-[#0a2540]/70" />
+          <div className="absolute inset-0 bg-linear-to-b from-[#0a2540]/60 via-transparent to-[#0a2540]/70" />
           {/* Subtle side vignette */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a2540]/40 via-transparent to-[#0a2540]/40" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#0a2540]/40 via-transparent to-[#0a2540]/40" />
         </div>
       </motion.div>
 

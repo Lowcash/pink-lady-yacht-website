@@ -255,7 +255,7 @@ export function Navigation() {
                   <img 
                     src={logoImage} 
                     alt="Pink Lady" 
-                    className={`w-auto transition-all duration-[1000ms] ease-in-out ${
+                    className={`w-auto transition-all duration-1000 ease-in-out ${
                       scrolled ? 'h-32 xl:h-36' : 'h-44 xl:h-48'
                     }`}
                     style={{ 
@@ -341,7 +341,7 @@ export function Navigation() {
                 {/* Menu Items - Stack na mobilu, Grid na tabletu */}
                 <div className="w-full max-w-md md:max-w-3xl">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                    {navItems.map((item, index) => {
+                    {navItems.map((item) => {
                       const Icon = item.icon;
                       return (
                         <button

@@ -1,15 +1,13 @@
-import { Button } from "../ui/button";
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import lineQRCode from "../../assets/line-qr-code.png";
 import { motion } from "motion/react";
-import { toast } from "sonner@2.0.3";
 import { COMPANY_INFO } from "../../lib/constants";
 
 export function Contact() {
   return (
     <section id="contact" className="snap-start relative min-h-screen flex flex-col justify-center overflow-hidden py-32 md:py-40">
       {/* Minimalist Gradient Background */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-white via-[#fef8fb] to-white" />
+      <div className="absolute inset-0 z-0 bg-linear-to-br from-white via-[#fef8fb] to-white" />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -161,7 +159,7 @@ export function Contact() {
         {/* Footer Section - Integrated */}
         <div className="relative mt-8 md:mt-12 pt-8 md:pt-12">
           {/* Minimalist Top Border Gradient */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ff67b1] to-transparent opacity-50" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#ff67b1] to-transparent opacity-50" />
           
           <div className="flex flex-col items-center justify-center text-center space-y-4 md:space-y-6 max-w-2xl mx-auto pb-4">
             
